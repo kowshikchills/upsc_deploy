@@ -1,18 +1,11 @@
-from bs4 import BeautifulSoup
 import requests
 import pandas as pd
 import numpy as np
 import re
-import nltk
-from nltk import sent_tokenize
-nltk.download('punkt')
 from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
 from setfit import SetFitModel, SetFitTrainer
-from datasets import load_dataset
 from sentence_transformers.losses import CosineSimilarityLoss
-import datasets
-from datasets import Dataset, DatasetDict
 from sklearn.metrics.pairwise import cosine_similarity
 import trafilatura
 from transformers import pipeline
@@ -22,7 +15,6 @@ from transformers import (
     AutoModelForTokenClassification,
     AutoTokenizer)
 from transformers.pipelines import AggregationStrategy
-import numpy as np
 import pickle
 import re
 import boto3

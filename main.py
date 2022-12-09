@@ -31,3 +31,4 @@ async def update_upsc_db(upsc: UpscDeploy):
     return {
         'flag': response_flag
     }
+

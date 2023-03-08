@@ -26,3 +26,4 @@ table = DB.Table(__TableName__)
 response = table.query(
   KeyConditionExpression=Key('url').eq(url)
 )
+print(response)

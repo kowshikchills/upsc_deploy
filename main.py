@@ -1,9 +1,10 @@
 from fastapi import FastAPI, File, Form, UploadFile
 from pydantic import BaseModel
+import boto3
+from boto3.dynamodb.conditions import Key
 from app_utils import *
 
 app = FastAPI()
-
 class UpscDeploy(BaseModel):
     url: str 
 
@@ -32,3 +33,17 @@ async def update_upsc_db(upsc: UpscDeploy):
         'flag': response_flag
     }
 
+@app.post('/fetch')
+async def fetch_data_db(upsc: UpscDeploy):
+    data = upsc.dict()
+    url = data['url']
+    __TableName__ = 'prod1_app_data'
+    client  = boto3.client('dynamodb',region_name = 'ap-south-1')
+    DB  = boto3.resource('dynamodb',region_name = 'ap-south-1')
+    table = DB.Table(__TableName__)
+    response = table.query(
+    KeyConditionExpression = Key('url').eq(url))
+
+    return {
+        'response': response
+    }

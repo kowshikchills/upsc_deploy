@@ -14,9 +14,9 @@ RUN unzip awscliv2.zip
 RUN ./aws/install
 
 # SET Credentials
-ARG AWS_KEY='AKIAQA5VD6H3OWTF2UFU'
-ARG AWS_SECRET_KEY='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' 
-ARG AWS_REGION='ap-south-1' 
+ARG AWS_KEY='XXXX'
+ARG AWS_SECRET_KEY='XXXX' 
+ARG AWS_REGION='XXXXX' 
 
 RUN aws configure set aws_access_key_id $AWS_KEY \ 
 && aws configure set aws_secret_access_key $AWS_SECRET_KEY \

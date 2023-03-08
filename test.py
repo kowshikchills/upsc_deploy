@@ -1,7 +1,10 @@
 
 from app_utils import *
+import boto3
+from boto3.dynamodb.conditions import Key
 
-url = "https://www.gktoday.in/topic/forbes-list-of-the-worlds-100-most-powerful-women/"
+
+url = "https://www.gktoday.in/topic/what-is-millets-giveaway/"
 
 text, text_act = get_data_url(url)
 if len(text) > 120:
@@ -15,4 +18,11 @@ if len(text) > 120:
         text = ' '.join(payload)
         summary = get_summary(url,pid,text, summarizer, th= min(int(len(text)/10),240))
         pid = pid+1
-response_flag = 'success'
+print('upload done')
+__TableName__ = 'prod1_app_data'
+client  = boto3.client('dynamodb',region_name = 'ap-south-1')
+DB  = boto3.resource('dynamodb',region_name = 'ap-south-1')
+table = DB.Table(__TableName__)
+response = table.query(
+  KeyConditionExpression=Key('url').eq(url)
+)
